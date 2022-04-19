@@ -2,7 +2,7 @@
 
 ## Description
 
-About the project...
+Detect fake tweets using transformes
 
 ----
 ## Training Model
@@ -10,7 +10,11 @@ About the project...
 ![Training MOdel](index.png)
 ## Results
 
-Validation Accuracy: 96.92 %
+Validation Accuracy: 97.34 %
+
+Confusion Matrix:
+
+![confusion Matrix](confusion_matrix.png)
 
 ----
 
