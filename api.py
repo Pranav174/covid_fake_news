@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from tensorflow.keras.models import load_model
 import tensorflow as tf
 from uvicorn import run
 import tensorflow_text 
@@ -8,7 +7,7 @@ import os
 
 app = FastAPI()
 
-covid_fake_news_model = load_model('covid_fake_news_model')
+covid_fake_news_model = tf.saved_model.load('covid_fake_news_model')
 
 origins = ["*"]
 methods = ["*"]
@@ -28,8 +27,9 @@ async def root():
 
 @app.get("/search")
 async def search(query:str):
-    predictions = covid_fake_news_model.predict([query])
-    score = tf.nn.softmax(predictions,axis=-1).numpy()[0][0]
+    print(query)
+    predictions = covid_fake_news_model.signatures["serving_default"](text=tf.constant([query]))['classifier']
+    score = tf.nn.sigmoid(predictions).numpy()[0][0]
     return {"score": score.item()}
     
 if __name__ == "__main__":

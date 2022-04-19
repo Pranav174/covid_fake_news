@@ -49,7 +49,7 @@ const search = function(keyword) {
     if(keyword==undefined || keyword=='') {
         return;
     }
-    var baseUrl = "http://localhost:8080"; //CHANGE FOR TESTING
+    var baseUrl = "http://localhost:5000"; //CHANGE FOR TESTING
     var theUrl = baseUrl + "/search?query=" + keyword;
     showSpinner();
     $.ajax({ 
@@ -62,16 +62,7 @@ const search = function(keyword) {
         }
     });
     
-    // var result = {"score" : 0.88};
-    // parseResponse(result, "", true);
-    // hideSpinner();
 };
-
-// const clearTable = function() {
-//     var table = $("#results");
-//     table.empty();
-//     table.append("<tr><th>Related</th><th colspan='2'>Score</th></tr>");
-// };
 
 $(window).load(function() {
     hideSpinner();
