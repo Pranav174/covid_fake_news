@@ -29,8 +29,6 @@ async def root():
 @app.get("/search")
 async def search(query:str):
     predictions = covid_fake_news_model.predict([query])
-    print(tf.nn.softmax(predictions,axis=-1).numpy())
-    print(tf.nn.softmax(predictions,axis=-1).numpy()[0][0])
     score = tf.nn.softmax(predictions,axis=-1).numpy()[0][0]
     return {"score": score.item()}
     
